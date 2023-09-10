@@ -3,7 +3,6 @@ package com.nikstanov.SensorRestApi.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +19,6 @@ public class Measurement {
     private int id;
 
     @Column(name = "value")
-    @NotEmpty(message = "Empty value")
     @Min(value = -100, message = "Incorrect value")
     @Max(value = 100, message = "Incorrect value")
     @Getter
@@ -39,8 +37,7 @@ public class Measurement {
     private Sensor sensor_owner;
 
     @Column(name = "raining")
-    @NotEmpty(message = "Add raining info")
     @Getter
     @Setter
-    private boolean isRaining;
+    private boolean raining;
 }
