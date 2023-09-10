@@ -6,10 +6,14 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 
 import javax.annotation.processing.Generated;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "sensors")
@@ -39,4 +43,14 @@ public class Sensor {
     @Getter
     @Setter
     private LocalDateTime created_at;
+
+    @OneToMany(mappedBy = "sensor_owner")
+    private List<Measurement> measurementList;
+
+    public void addMeasurementList(Measurement measurement) {
+        if(measurementList == null){
+            measurementList = new ArrayList<>();
+        }
+        measurementList.add(measurement);
+    }
 }
